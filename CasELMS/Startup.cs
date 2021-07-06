@@ -27,6 +27,7 @@ namespace CasELMS
         {
             services.AddControllersWithViews();
             services.AddMvc();
+            services.AddAutoMapper(typeof(Startup));
             services.AddDbContext<ProjectContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CASDB")));
             services.AddSwaggerGen(myswag =>
             {
@@ -56,8 +57,8 @@ namespace CasELMS
                 myswag.SwaggerEndpoint("/swagger/V1/swagger.json", "my OWNElms Project");
             });
             app.UseRouting();
-
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

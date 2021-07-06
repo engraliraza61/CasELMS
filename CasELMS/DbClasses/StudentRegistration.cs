@@ -19,8 +19,6 @@ namespace CasELMS.DbClasses
         public string Email { get; set; }
         public string Password { get; set; }
         public string Adress { get; set; }
-        public string City  { get; set; }
-        public string Countru  { get; set; }
         public int PostalCode  { get; set; }
         public short Status { get; set; }
         public DateTime InsertionDate { get; set; }
