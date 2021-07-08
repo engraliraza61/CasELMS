@@ -19,7 +19,14 @@ namespace CasELMS.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            if (Request.Cookies["userIdentity"] == null)
+            {
+                return RedirectToActionPermanent("LoginPage");
+            }
+            else
+            {
+                return View();
+            }
         }
         public IActionResult Pricing()
         {
@@ -45,8 +52,19 @@ namespace CasELMS.Controllers
         {
             return View();
         }
-       
+        public IActionResult AllStudent()
+        {
+            return View();
+        }
+        public IActionResult AddStudent()
+        {
+            return View();
+        }
 
+        public IActionResult UpdateStudent()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -48,10 +48,33 @@ namespace CasELMS.Controllers
         }
         [HttpGet]
         [Route("GetAllStudent")]
-        public List<StudentRegistration> GetAllStudent(StudentRegistration std)
+        public List<StudentRegistration> GetAllStudent()
         {
             List<StudentRegistration> StudentList = _dbo.StudentRegistration.ToList();
             return StudentList;
+        }
+        [HttpPost]
+        [Route("Login")]
+        public Response Login(StudentRegistration std)
+        {
+            Response res = new Response();
+            try
+            {
+                StudentRegistration newStd = _dbo.StudentRegistration.Where(r=>r.Email.Equals(std.Email) && r.Password.Equals(std.Password)).FirstOrDefault();
+                if (newStd == default)
+                {
+                    res.Status = "Invalid UserName / Password";
+                }
+                else
+                {
+                    res.Status = "login successfully";
+                }
+            }
+            catch (Exception ex)
+            {
+                res.Status = ex.Message;
+            }
+            return res;
         }
     }
 }

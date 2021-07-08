@@ -21,6 +21,8 @@ namespace CasELMS.DbClasses
         public string Adress { get; set; }
         public int PostalCode  { get; set; }
         public short Status { get; set; }
+        public string StudentImage { get; set; }
+        public string Class { get; set; }
         public DateTime InsertionDate { get; set; }
         public DateTime DeactivateDate { get; set; }
         public DateTime ActivateDate { get; set; }
