@@ -17,7 +17,7 @@
         address = $('#studentAddress').val();
         postalCode = $('#studentPostalCode').val();
         studentClass = $('#studentClass').val();
-        var jsonObject = { 'FirstName': firstName, 'LastName': lastName, 'UserName': userName, 'StudentPhoneNumber': phoneNo, 'Email': email, 'Password': password, 'Adress': address, 'PostalCode': postalCode, 'studentClass': studentClass };
+        var jsonObject = { 'FirstName': firstName, 'LastName': lastName, 'UserName': userName, 'StudentPhoneNumber': phoneNo, 'Email': email, 'Password': password, 'Adress': address, 'PostalCode': postalCode, 'class': studentClass };
         if (firstName.length == 0 || lastName.length == 0 || userName.length == 0 || email.length == 0 || password.length == 0 || phoneNo.length == 0 || address.length == 0 || postalCode.length == 0 || studentClass.length==0) {
             alert("please fill the form completely");
         }
@@ -57,7 +57,7 @@
                 success: function (response) {
                     $.each(response, function (index, value) {
                         if (response.status == "login successfully") {
-                            alert(response.UserIdentity);
+                            alert(response.status);
                             $('#loginEmail').val('');
                             $('#loginPassword').val('');
                             $.cookie("UserIdentity", Response.UserIdentity);

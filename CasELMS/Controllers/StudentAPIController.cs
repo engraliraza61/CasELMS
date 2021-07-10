@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using CasELMS.Context;
 using CasELMS.DbClasses;
+using CasELMS.ManagementClasses;
 using CasELMS.MappingClasses;
 using CasELMS.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace CasELMS.Controllers
 {
+   
     [Route("api/[controller]")]
     [ApiController]
     public class StudentAPIController : ControllerBase
@@ -53,6 +56,7 @@ namespace CasELMS.Controllers
             List<StudentRegistration> StudentList = _dbo.StudentRegistration.ToList();
             return StudentList;
         }
+        [AllowAnonymous]
         [HttpPost]
         [Route("Login")]
         public Response Login(StudentRegistration std)
@@ -68,7 +72,41 @@ namespace CasELMS.Controllers
                 else
                 {
                     res.Status = "login successfully";
+                    res.Token = JWT.GenerateJSONWebToken(std, config);
                 }
+            }
+            catch (Exception ex)
+            {
+                res.Status = ex.Message;
+            }
+            return res;
+        }
+        [HttpPost]
+        [Route("UpdatedStudent")]
+        public List<StudentRegistration> UpdatedStudent(StudentRegistration std)
+        {
+                    List<StudentRegistration> StudentList = _dbo.StudentRegistration.Where(r => r.StudentId.Equals(std.StudentId)).ToList();
+                    return StudentList;
+        }
+        [HttpPut]
+        [Route("updateStudent")]
+        public Response updateStudent(StudentRegistration obj)
+        {
+            Response res = new Response();
+            try
+            {
+                StudentRegistration newList = _dbo.StudentRegistration.Find(obj.StudentId);
+                newList.FirstName = obj.FirstName;
+                newList.LastName = obj.LastName;
+                newList.UserName = obj.UserName;
+                newList.Email = obj.Email;
+                newList.StudentPhoneNumber = obj.StudentPhoneNumber;
+                newList.PostalCode = obj.PostalCode;
+                newList.Class = obj.Class;
+                newList.Adress = obj.Adress;
+                _dbo.StudentRegistration.Update(newList);
+                _dbo.SaveChanges();
+                res.Status = "update Successfully";
             }
             catch (Exception ex)
             {

@@ -15,5 +15,6 @@ namespace CasELMS.MappingClasses
         public string Password { get; set; }
         public string Adress { get; set; }
         public int PostalCode { get; set; }
+        public string Class { get; set; }
     }
 }

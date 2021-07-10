@@ -1,4 +1,5 @@
 ﻿using CasELMS.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -19,14 +20,15 @@ namespace CasELMS.Controllers
         }
         public IActionResult Index()
         {
-            if (Request.Cookies["userIdentity"] == null)
-            {
-                return RedirectToActionPermanent("LoginPage");
-            }
-            else
-            {
-                return View();
-            }
+            return View();
+            //if (Request.Cookies["userIdentity"] == null)
+            //{
+            //    return RedirectToActionPermanent("LoginPage");
+            //}
+            //else
+            //{
+            //    return View();
+            //}
         }
         public IActionResult Pricing()
         {
@@ -61,8 +63,9 @@ namespace CasELMS.Controllers
             return View();
         }
 
-        public IActionResult UpdateStudent()
+        public IActionResult UpdateStudent(string id)
         {
+            ViewBag.id = id;
             return View();
         }
 

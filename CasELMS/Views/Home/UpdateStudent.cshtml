@@ -4,5 +4,162 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>UpdateStudent</h2>
+
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-icon" data-background-color="rose">
+                        <i class="material-icons">perm_identity</i>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">Edit Profile - <small class="category">Complete your profile</small></h4>
+
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group label-floating">
+                                        <span class="control-label">firstName</span>
+                                        <input type="text" id="updatedFirstName" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group label-floating">
+                                        <span class="control-label">lastName</span>
+                                        <input type="text" id="updatedLastName" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group label-floating">
+                                        <span class="control-label">UserName</span>
+                                        <input type="email" id="updatedUserName" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group label-floating">
+                                        <span class="control-label">Email</span>
+                                        <input type="text" id="updatedEmail" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group label-floating">
+                                        <span class="control-label">PhoneNo</span>
+                                        <input type="text" id="updatedPhoneNo" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group label-floating">
+                                        <span class="control-label">Adress</span>
+                                        <input type="text" id="updatedAddress" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group label-floating">
+                                        <span class="control-label">postalCode</span>
+                                        <input type="text" id="updatedPostalCode" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group label-floating">
+                                        <span class="control-label">Class</span>
+                                        <input type="text" id="updatedClass" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" id="StudentUpdate" class="btn btn-rose pull-right">Update Profile</button>
+                            <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a href="#pablo">
+                            <img class="img" src="../../assets/img/faces/marc.jpg" />
+                        </a>
+                    </div>
+
+                    <div class="card-content">
+                        <h6 class="category text-gray">CEO / Co-Founder</h6>
+                        <h4 class="card-title">Alec Thompson</h4>
+                        <p class="description">
+                            Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                        </p>
+                        <a href="#pablo" class="btn btn-rose btn-round">Follow</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        var id =@Html.Raw(ViewBag.id)
+        var jsonObject = { "StudentId": id };
+        $.ajax({
+            type: "POST",
+            data: JSON.stringify(jsonObject),
+            url: "http://localhost:30881/api/StudentAPI/UpdatedStudent",
+            contentType: "application/json",
+            success: function (response) {
+                $.each(response, function (index, value) {
+                    $('#updatedFirstName').val(value.firstName);
+                    $('#updatedLastName').val(value.lastName);
+                    $('#updatedUserName').val(value.userName);
+                    $('#updatedEmail').val(value.email);
+                    $('#updatedPhoneNo').val(value.studentPhoneNumber);
+                    $('#updatedAddress').val(value.adress);
+                    $('#updatedPostalCode').val(value.postalCode);
+                    $('#updatedClass').val(value.class);
+                });
+            }
+        });
+        $('#StudentUpdate').click(function () {
+            firstName=$('#updatedFirstName').val();
+            lastName=$('#updatedLastName').val();
+            userName=$('#updatedUserName').val();
+            email=$('#updatedEmail').val();
+            studentPhoneNumber=$('#updatedPhoneNo').val();
+            adress=$('#updatedAddress').val();
+            postalCode=$('#updatedPostalCode').val();
+            Class = $('#updatedClass').val();
+            var jsonObject = { 'studentId':@Html.Raw(ViewBag.id),'firstName': firstName, 'lastName': lastName, 'userName': userName, 'email': email, 'studentPhoneNumber': studentPhoneNumber, 'adress': adress, 'postalCode': postalCode, 'class': Class };
+            alert(adress);
+            $.ajax({
+                type: "PUT",
+                data: JSON.stringify(jsonObject),
+                url: "http://localhost:30881/api/StudentAPI/updateStudent",
+                contentType: "application/json",
+                success: function (response) {
+                    $.each(response, function (index, value) {
+                        $('#updatedFirstName').val('');
+                        $('#updatedLastName').val('');
+                        $('#updatedUserName').val('');
+                        $('#updatedEmail').val('');
+                        $('#updatedPhoneNo').val('');
+                        $('#updatedAddress').val('');
+                        $('#updatedPostalCode').val('');
+                        $('#updatedClass').val('');
+                        window.location.href = '/Home/AllStudent';
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+
 
