@@ -13,5 +13,10 @@ namespace CasELMS.Context
         {
         }
         public DbSet<StudentRegistration> StudentRegistration { get; set; }
+        public DbSet<Course> Course { get; set; }
+        public DbSet<Users> User { get; set; }
+        public DbSet<Permissions> Permission { get; set; }
+        public DbSet<Roles> Role { get; set; }
+        public DbSet<PermissionAssignToRoles> PermissionAssignToRole { get; set; }
     }
 }
