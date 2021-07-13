@@ -123,6 +123,24 @@ namespace CasELMS.Controllers
         {
             return View();
         }
+
+        public IActionResult Role()
+        {
+            return View();
+        }
+        public IActionResult ManageRoles(string id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
+        public IActionResult Permission()
+        {
+            return View();
+        }
+        public IActionResult User()
+        {
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

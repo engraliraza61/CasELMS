@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CasELMS.MappingClasses
+namespace CasELMS.DBViewModel
 {
     public class StudentModal
     {

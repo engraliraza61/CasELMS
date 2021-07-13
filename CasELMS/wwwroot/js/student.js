@@ -109,7 +109,7 @@
             data: JSON.stringify(jsonObject),
             contentType: 'application/json',
             success: function (response) {
-                if (response.status == 'Email Verified') {
+                if (response.status == 'Email verified') {
                     $('#EmailMassage').html('Email Verified');
                     $('#EmailMassage').css('color', 'green');
                 }
@@ -125,20 +125,6 @@
         $.get("http://localhost:30881/api/StudentAPI/GetAllStudent", function (response) {
             $.each(response, function (index, value) {
                 $('#tblStudent').append("<tr><td>" + value.firstName + "</td><td>" + value.lastName + "</td><td>" + value.email + "</td><td>" + value.studentPhoneNumber + "</td><td>" + value.status + "</td><td align='left'> <a href='#' id='RemoveStudent" + value.studentId + "'  class='btn btn-simple btn-danger btn-icon remove'><i class='material-icons'>close</i></a><a href='/Home/UpdateStudent/" + value.studentId + "' class='btn btn-simple btn-success btn-icon edit'><i class='material-icons'>edit</i></a></td></tr>");
-            });
-        });
-        $('#showDeAciveStudent').click(function () {
-            $.get("http://localhost:30881/api/StudentAPI/ShowDeactiveStudent", function (response) {
-                $.each(response, function (index, value) {
-                    $('#tblStudent').append("<tr><td>" + value.firstName + "</td><td>" + value.lastName + "</td><td>" + value.email + "</td><td>" + value.studentPhoneNumber + "</td><td>" + value.status + "</td><td align='left'> <a href='#' id='RemoveStudent" + value.studentId + "'  class='btn btn-simple btn-danger btn-icon remove'><i class='material-icons'>close</i></a><a href='/Home/UpdateStudent/" + value.studentId + "' class='btn btn-simple btn-success btn-icon edit'><i class='material-icons'>edit</i></a></td></tr>");
-                });
-            });
-        });
-        $('#showAciveStudent').click(function () {
-            $.get("http://localhost:30881/api/StudentAPI/ShowActiveStudent", function (response) {
-                $.each(response, function (index, value) {
-                    $('#tblStudent').append("<tr><td>" + value.firstName + "</td><td>" + value.lastName + "</td><td>" + value.email + "</td><td>" + value.studentPhoneNumber + "</td><td>" + value.status + "</td><td align='left'> <a href='#' id='RemoveStudent" + value.studentId + "'  class='btn btn-simple btn-danger btn-icon remove'><i class='material-icons'>close</i></a><a href='/Home/UpdateStudent/" + value.studentId + "' class='btn btn-simple btn-success btn-icon edit'><i class='material-icons'>edit</i></a></td></tr>");
-                });
             });
         });
     $.get("http://localhost:30881/api/CourseAPI/GetAllCourse", function (response) {
@@ -210,7 +196,7 @@
             $.ajax({
                 type: "POST",
                 data: JSON.stringify(jsonObject),
-                url: "http://localhost:30881/api/StudentAPI/Login",
+                url: "http://localhost:30881/api/StudentAPI/LoginStudent",
                 contentType: "application/json",
                 success: function (response) {
                     $.each(response, function (index, value) {

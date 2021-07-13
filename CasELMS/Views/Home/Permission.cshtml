@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewData["Title"] = "Permission";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/site.js"></script>
+
+<div class="wrapper">
+    <div class="content-wrapper">
+        <h1>Permission</h1>
+
+        <div class="card">
+            <div class="card-header">
+                Add Permission
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        PermissionTitle
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" id="txtPermissionTitle" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        URL
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" id="txtPermissionURL" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        IconCode
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" id="txtIConCode" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        IS Menu
+                    </div>
+                    <div class="col-md-6">
+                        <input type="radio" name="txtIsMenu" id="rdIsMenuYes" />Yes
+                        <input type="radio" name="txtIsMenu" id="rdIsMenuNo" />No
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-success" type="button" id="btnAddPermission">
+                    Add Permission
+                </button>
+            </div>
+        </div>
+
+        <div class="container">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>PermissionId</td>
+                        <td>PermissionTitle</td>
+                        <td>URL</td>
+                        <td>IconCode</td>
+                        <td>IsMenu</td>
+                        <td>Status</td>
+                        <td>Actions</td>
+                    </tr>
+
+                </thead>
+                <tbody id="tblPermission">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+        <script>
+            $(document).ready(function () {
+
+                GetPermission();
+
+                $('#btnAddPermission').click(function () {
+                    var Permission = $('#txtPermissionTitle').val();
+                    var URL = $('#txtPermissionURL').val();
+                    var IconCode = $('#txtIConCode').val();
+                    var IsMenu = 'false';
+                    if ($('#rdIsMenuYes').is(':checked')) {
+                        IsMenu = 'true'
+                    }
+                    var jsonObject = { "permissionUrl": URL, "permissionTitle": Permission, "iconCode": IconCode, "isMenu": IsMenu };
+                    $.ajax({
+                        type: "POST",
+                        url: "https://localhost:44343/api/PermissionAPI/InsertPermission",
+                        contentType: "application/json",
+                        data: JSON.stringify(jsonObject),
+                        success: function (response) {
+                            if (response.status == "Permission Added") {
+                                $('#tblPermission').html('');
+                                GetPermission();
+                                alert("Permission Added Successfully")
+                            }
+                        }
+                    });
+                });
+            });
+
+            function GetPermission() {
+                $.ajax({
+                    type: "GET",
+                    url: "https://localhost:44343/api/PermissionAPI/GetPermission",
+                    contentType: "application/json",
+                    success: function (response) {
+                        $.each(response, function (index, value) {
+                            var Status = "Deactive";
+                            if (value.permissionStatus == 1) {
+                                Status = "Active";
+                            }
+                            $('#tblPermission').append("<tr><td>" + value.permissionId + "</td><td>" + value.permissionTitle + "</td><td>" + value.permissionUrl + "</td><td>" + value.iconCode + "</td><td>" + value.isMenu + "</td><td>" + Status + "</td><td><button class='btn btn-danger btnRowDelete'>Delete</button> | <button class='btn btn-warning btnRowUpdate'>Update</button></td></tr>");
+                        });
+
+                    }
+                });
+            }
+        </script>
+
+
