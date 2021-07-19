@@ -23,6 +23,7 @@ namespace CasELMS.DbClasses
         public short Status { get; set; }
         public string StudentImage { get; set; }
         public string Class { get; set; }
+        public string RoleId { get; set; }
         public DateTime InsertionDate { get; set; }
         public DateTime DeactivateDate { get; set; }
         public DateTime ActivateDate { get; set; }

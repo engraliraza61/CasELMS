@@ -4,72 +4,81 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<script src="~/js/site.js"></script>
-<div class="wrapper">
-    <div class="content-wrapper">
-        <h1>Role</h1>
 
-        <div class="card">
-            <div class="card-header">
-                Add Role
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        RoleId
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="col-md-12">
+                        <h1>Role</h1>
+
+                        <div class="card">
+                            <div class="card-header">
+                                Add Role
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        RoleId
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input readonly="readonly" class="form-control" id="txtRole" value="@Html.Raw(ViewBag.id)" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        RoleTitle
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input readonly="readonly" class="form-control" id="txtRole" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+
+                            </div>
+                        </div>
+
+                        <div class="container">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <td>Permission Title</td>
+                                        <td>Action</td>
+
+                                    </tr>
+
+                                </thead>
+                                <tbody id="tblPermissions">
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2">
+                                            <button class="btn btn-success" id="SavePermisssions">Submit</button>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <input readonly="readonly" class="form-control" id="txtRole" value="@Html.Raw(ViewBag.id)" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        RoleTitle
-                    </div>
-                    <div class="col-md-6">
-                        <input readonly="readonly" class="form-control" id="txtRole" />
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer">
+                </div><!--  end card  -->
+            </div> <!-- end col-md-12 -->
+        </div> <!-- end row -->
 
-            </div>
-        </div>
-
-        <div class="container">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <td>Permission Title</td>
-                        <td>Action</td>
-
-                    </tr>
-
-                </thead>
-                <tbody id="tblPermissions">
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="2">
-                            <button class="btn btn-success" id="SavePermisssions">Submit</button>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
     </div>
 </div>
-        <script>
+
+
+
+<script>
     $(document).ready(function () {
         var RoleId = @Html.Raw(ViewBag.id) ;
         var data = { "roleId": RoleId };
         $.ajax({
             type: "POST",
             data: JSON.stringify(data),
-            url: "https://localhost:44343/api/PermissionAPI/GetAllPermissionByRole",
+            url: "/api/PermissionAPI/GetAllPermissionByRole",
             contentType: "application/json",
             success: function (response) {
                 $.each(response, function (index, value) {
@@ -104,13 +113,14 @@
             $.ajax({
                 type: "POST",
                 data: JSON.stringify(data),
-                url: "https://localhost:44343/api/UserAPI/ManagePermissionByRole",
+                url: "/api/PermissionAPI/ManagePermissionByRole",
                 contentType: "application/json",
                 success: function (response) {
                     alert(response.status);
-                }
+                },
+                error: function (errormsg) { prompt("", JSON.stringify(errormsg)) }
             });
 
         });
     });
-        </script>
+</script>

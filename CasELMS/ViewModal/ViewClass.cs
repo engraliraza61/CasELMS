@@ -15,9 +15,6 @@ namespace CasELMS.ViewModal
             CreateMap<StudentModal, StudentRegistration>().ReverseMap();
             CreateMap<RoleModal, Roles>().ReverseMap();
             CreateMap<PermissionModal, Permissions>().ReverseMap();
-            CreateMap<UsersModal, Users>().ReverseMap();
-            CreateMap<UpdateUSerModal, Users>().ReverseMap();
-            CreateMap<DeleteUSerModal, Users>().ReverseMap();
             CreateMap<UpdatePermissionModal, Permissions>().ReverseMap();
             CreateMap<DeletePermissionModal, Permissions>().ReverseMap();
             CreateMap<UpdateRoleModal, Roles>().ReverseMap();

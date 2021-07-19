@@ -118,5 +118,25 @@ namespace CasELMS.Controllers
             }
 
         }
+        [HttpPost]
+        [Route("GetPermissionForRole")]
+        public async Task<ActionResult> GetPermissionForRole(Roles role)
+        {
+            await Task.Delay(0);
+            var UserList = (from perm in _project.Permission
+                            where (perm.PermissionStatus == 1)
+                            join permAssign in _project.PermissionAssignToRole.Where(r => r.RoleId == role.RoleId && r.Status == 1)
+                            on perm.PermissionId equals permAssign.PermissionId
+                            select new
+                            {
+                                PermissionId = perm.PermissionId,
+                                PermissionTitle = perm.PermissionTitle,
+                                AssignedId = permAssign.AssignedId,
+                                permissionIcon = perm.IconCode,
+                                permissionUrl = perm.PermissionUrl,
+                            }).ToList();
+
+            return Ok(UserList);
+        }
     }
 }

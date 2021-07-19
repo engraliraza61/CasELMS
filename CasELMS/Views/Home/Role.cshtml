@@ -4,46 +4,93 @@
 }
 
 <div class="content">
-    <div class="container">
-        <div class="">
-            <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-                <h1>Role</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        Add Role
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                RoleTitle
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-control" id="txtRole" />
-                            </div>
+                    <div class="col-md-12">
+                        <div class="">
+                            <div >
+                                <div >
+                                    <h1>Role</h1>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Add Role
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    RoleTitle
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input class="form-control" id="txtRole" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <button class="btn btn-success" type="button" id="btnAddRole">
+                                                Add Role
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    @*<div class="container">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <td>RoleId</td>
+                                                    <td>RoleTitle</td>
+                                                    <td>Status</td>
+                                                    <td>Actions</td>
+                                                </tr>
+
+                                            </thead>
+                                            <tbody id="tblRole">
+                                            </tbody>
+                                        </table>
+                                    </div>*@
+                                </div> <!-- end col-md-12 -->
+                            </div> <!-- end row -->
+
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <button class="btn btn-success" type="button" id="btnAddRole">
-                            Add Role
-                        </button>
+                </div><!--  end card  -->
+            </div> <!-- end col-md-12 -->
+        </div> <!-- end row -->
+
+    </div>
+</div>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div>
+                        <div>
+                            <div >
+                                <div>
+
+                                    <div class="">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <td>RoleId</td>
+                                                        <td>RoleTitle</td>
+                                                        <td>Status</td>
+                                                        <td>Actions</td>
+                                                    </tr>
+
+                                                </thead>
+                                                <tbody id="tblRole">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                </div> <!-- end col-md-12 -->
+                            </div> <!-- end row -->
+
+                        </div>
                     </div>
-                </div>
-
-                <div class="container">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <td>RoleId</td>
-                                <td>RoleTitle</td>
-                                <td>Status</td>
-                                <td>Actions</td>
-                            </tr>
-
-                        </thead>
-                        <tbody id="tblRole">
-                        </tbody>
-                    </table>
-                </div>
+                </div><!--  end card  -->
             </div> <!-- end col-md-12 -->
         </div> <!-- end row -->
 
@@ -53,53 +100,49 @@
 
 
 
-
-
-
-
 @*<div class="content">
-    <div class="">
-        <h1>Role</h1>
+        <div class="">
+            <h1>Role</h1>
 
-        <div class="card">
-            <div class="card-header">
-                Add Role
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        RoleTitle
-                    </div>
-                    <div class="col-md-6">
-                        <input class="form-control" id="txtRole" />
+            <div class="card">
+                <div class="card-header">
+                    Add Role
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            RoleTitle
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control" id="txtRole" />
+                        </div>
                     </div>
                 </div>
+                <div class="card-footer">
+                    <button class="btn btn-success" type="button" id="btnAddRole">
+                        Add Role
+                    </button>
+                </div>
             </div>
-            <div class="card-footer">
-                <button class="btn btn-success" type="button" id="btnAddRole">
-                    Add Role
-                </button>
+
+            <div class="container">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>RoleId</td>
+                            <td>RoleTitle</td>
+                            <td>Status</td>
+                            <td>Actions</td>
+                        </tr>
+
+                    </thead>
+                    <tbody id="tblRole">
+                    </tbody>
+                </table>
             </div>
+
         </div>
-
-        <div class="container">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <td>RoleId</td>
-                        <td>RoleTitle</td>
-                        <td>Status</td>
-                        <td>Actions</td>
-                    </tr>
-
-                </thead>
-                <tbody id="tblRole">
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-</div>*@
+    </div>*@
 
 
 
@@ -114,7 +157,7 @@
             var jsonObject = { "roleTitle": AddRole };
             $.ajax({
                 type: "POST",
-                url: "https://localhost:30881/api/RoleAPI/InsertRole",
+                url: "/api/RoleAPI/InsertRole",
                 contentType: "application/json",
                 data: JSON.stringify(jsonObject),
                 success: function (response) {
@@ -132,7 +175,7 @@
     function GetRole() {
         $.ajax({
             type: "GET",
-            url: "https://localhost:44343/api/RoleAPI/GetRole",
+            url: "/api/RoleAPI/GetRole",
             contentType: "application/json",
             success: function (response) {
                 $.each(response, function (index, value) {
@@ -141,10 +184,34 @@
                     if (value.roleStatus == 1) {
                         Status = "Active";
                     }
-                    $('#tblRole').append("<tr><td>" + value.roleId + "</td><td>" + value.roleTitle + "</td><td>" + Status + "</td><td><button class='btn btn-danger btnRowDelete'>Delete</button> | <button class='btn btn-warning btnRowUpdate'>Update</button> | <a class='btn btn-warning' href='/Home/ManageRoles/" + value.roleId + "'>ManageRole</a></td></tr>");
+                    $('#tblRole').append("<tr><td>" + value.roleId + "</td><td>" + value.roleTitle + "</td><td>" + Status + "</td><td><button class='btn btn-danger btnRowDelete" + value.roleId + "'>Delete</button> | <button class='btn btn-warning btnRowUpdate' id='updateRole" + value.roleId + "'>Update</button> | <a class='btn btn-warning' href='/Home/ManageRoles/" + value.roleId + "'>ManageRole</a></td></tr>");
                 });
 
             }
+        });
+        var Id;
+        var updateRow;
+        $(document).on('click', '.btnRowUpdate', function () {
+            Id = $(this).attr('id');
+            Id = Id.replace("updateRole", "");
+            updateRow = $(this).closest('tr');
+            RoleName = $(updateRow).find('td').eq(1).html();
+            alert(RoleName);
+            var jsonObject = { 'roleId': Id, 'roleName': RoleName };
+            $.ajax({
+                type: "POST",
+                url: "/api/RoleAPI/InsertRole",
+                contentType: "application/json",
+                data: JSON.stringify(jsonObject),
+                success: function (response) {
+                    if (response.status == "Role Added") {
+                        $('#tblRole').html('');
+                        GetRole();
+                        alert("Role Added Successfully")
+                    }
+
+                }
+            });
         });
     }
 </script>
